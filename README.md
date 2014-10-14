@@ -8,7 +8,7 @@ This is a version of the sticky table code originally written by Terry Munn, wra
 ## Dependencies
 
 * jQuery 2.1
-* jQuery throttle / debounce - v1.1 - 3/7/2010 (http://benalman.com/projects/jquery-throttle-debounce-plugin/)
+* [jQuery throttle / debounce - v1.1 - 3/7/2010](http://benalman.com/projects/jquery-throttle-debounce-plugin/)
 
 ## Usage
 
@@ -16,7 +16,7 @@ This is a version of the sticky table code originally written by Terry Munn, wra
   $('#myTable').stickytable(options);
 ```
 
-By default just the header (eg. the thead) is sticky. Biaxial headers are possible — this is for situations where both horizontal and vertical headers are needed. To enable, just wrap the first element in each tbody row in a th instead of a td:
+By default just the header of the table (eg. the thead) is sticky. Biaxial headers are possible — this is for situations where both horizontal and vertical headers are needed. To enable, just wrap the first element in each tbody row in a th instead of a td:
 
 ```html
   <tbody>
@@ -38,11 +38,11 @@ A boolean which when true copies any classes on the target table to the sticky t
 
 ### copyEvents
 
-A boolean which when true copies any events on the target table to the sticky table. An example would be if there was a click event on a th element in the thead to do sorting, this would carry over to the sticky column header. Default is false.
+A boolean which when true copies any events on the target table to the sticky table. An example would be if there was a click event on a th element in the thead to do sorting, this would carry over to the sticky column header th. Default is false.
 
 ### overflowy
 
-A boolean which when true adds an overflow-y class to the sticky table wrapper (ie. sticky-wrap class). This means the table will scroll vertically and only be as tall as it's parent div (see .sticky-wrap.overflow-y in css). 
+A boolean which when true adds an overflow-y class to the sticky table wrapper (ie. sticky-wrap class). This means the table will scroll vertically and only be as tall as it's parent div (see .sticky-wrap.overflow-y in css). Default is false.
 
 ## Methods
 
