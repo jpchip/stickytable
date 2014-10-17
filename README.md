@@ -46,17 +46,11 @@ A boolean which when true adds an overflow-y class to the sticky table wrapper (
 
 ## Methods
 
-### init
-
-Instantiates sticky table with default values.
-
-```javascript
-  $('#myTable').stickyTable('init');
-```
+Methods cannot be called until the stickyTable plugin has been initialized on the element.
 
 ### destroy
 
-Removes sticky table classes and elements.
+Completely removes sticky table classes and elements and destroys the instance.
 
 ```javascript
   $('#myTable').stickyTable('destroy');
@@ -64,7 +58,10 @@ Removes sticky table classes and elements.
 
 ## Exceptions
 
-Throws exception if target element is not a table.
+* If target element is not a table.
+* If plugin has not been initialised when calling a method
+* If method is private
+* If method does not exist
 
 ## Source
 
