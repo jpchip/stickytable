@@ -28,21 +28,13 @@
 		this.element = element;
 		this._defaults = defaults;
 		this._name = pluginName;
-		this.options = $.extend({}, defaults);
 
-		if (typeof options === 'string' || options instanceof String) {
-			if (this[options] !== undefined && $.isFunction(this[options])) {
-				this[options]();
-			}
-			return;
-		} else {
-			this.options = $.extend({}, defaults, options);
-		}
+		this.options = $.extend({}, defaults, options);
 
-		this.init();
+		this._init();
 	}
 
-	StickyTable.prototype.init = function () {
+	StickyTable.prototype._init = function () {
 		var $w = $(window),
 			$t = $(this.element),
 			classList = [],
@@ -58,7 +50,7 @@
 			calcAllowance;
 
 		if (!$(this.element).is("table")) {
-			throw new Error('Sticky Table must be called on a table!');
+			$.error('Target element must be a table');
 		}
 
 		//don't run this function again on same element!
@@ -245,22 +237,28 @@
 			$t.removeClass('sticky-enabled');
 			//todo: clear events...
 		}
+		$.removeData(this.element, 'plugin_' + this._name);
 	};
 
-	// A really lightweight plugin wrapper around the constructor, 
-	// preventing against multiple instantiations
 	$.fn[pluginName] = function (options) {
 		return this.each(function () {
-			if (!$.data(this, 'plugin_' + pluginName)) {
-				$.data(this, 'plugin_' + pluginName,
-				new StickyTable(this, options));
-			} else {
-				var p = $.data(this, 'plugin_' + pluginName);
+			var instance = $.data(this, 'plugin_' + pluginName);
+			if (instance) {
 				if (typeof options === 'string' || options instanceof String) {
-					if (p[options] !== undefined && $.isFunction(p[options])) {
-						p[options]();
+					if (instance[options] !== undefined && $.isFunction(instance[options])) {
+						if (options.indexOf('_') !== 0) {
+							$.error('Method ' + options + ' is private!');
+						} else {
+							instance[options](Array.prototype.slice.call(arguments, 1));
+						}
+					} else {
+						$.error('Method ' + options + ' does not exist.');
 					}
 				}
+			} else if (typeof options === 'object' || !options) {
+				$.data(this, 'plugin_' + pluginName, new StickyTable(this, options));
+			} else {
+				$.error('Plugin must be initialised before using method: ' + options);
 			}
 		});
 	};
