@@ -3,7 +3,7 @@ jQuery Stick Table Headers
 
 This is a version of the sticky table code originally written by Terry Munn, wrapped in a jquery plugin to make it more reusable. I also added some new options and functions.
 
-[DEMO](http://jsfiddle.net/jchip/48wbdpjs/4/)
+[DEMO](http://jsfiddle.net/jchip/sd12fsdo/6/)
 
 ## Dependencies
 
@@ -13,7 +13,7 @@ This is a version of the sticky table code originally written by Terry Munn, wra
 ## Usage
 
 ```javascript
-  $('#myTable').stickytable(options);
+  $('#myTable').stickyTable(options);
 ```
 
 By default just the header of the table (eg. the thead) is sticky. Biaxial headers are possible — this is for situations where both horizontal and vertical headers are needed. To enable, just wrap the first element in each tbody row in a th instead of a td:
@@ -46,17 +46,25 @@ A boolean which when true adds an overflow-y class to the sticky table wrapper (
 
 ## Methods
 
+### init
+
+Instantiates sticky table with default values.
+
+```javascript
+  $('#myTable').stickyTable('init');
+```
+
 ### destroy
 
 Removes sticky table classes and elements.
 
 ```javascript
-  $('#myTable').stickytable('destroy');
+  $('#myTable').stickyTable('destroy');
 ```
 
 ## Exceptions
 
-Throws exception if element is not a table.
+Throws exception if target element is not a table.
 
 ## Source
 
