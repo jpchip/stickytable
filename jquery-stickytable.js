@@ -246,7 +246,7 @@
 			if (instance) {
 				if (typeof options === 'string' || options instanceof String) {
 					if (instance[options] !== undefined && $.isFunction(instance[options])) {
-						if (options.indexOf('_') !== 0) {
+						if (options.indexOf('_') !== -1) {
 							$.error('Method ' + options + ' is private!');
 						} else {
 							instance[options](Array.prototype.slice.call(arguments, 1));
