@@ -1,5 +1,6 @@
-﻿/*
- * jQuery Stick Table Headers
+/*
+ * jQuery Stick Table Headers - v1.0 - 10/17/2014
+ * https://github.com/jpchip/stickytable
  * 
  * Wrapped version of sticky table headers code here:
  * http://tympanus.net/codrops/2014/01/09/sticky-table-headers-columns/
@@ -13,83 +14,76 @@
  * http://benalman.com/projects/jquery-throttle-debounce-plugin/
  * 
  */
-(function ($) {
+(function ($, window, document, undefined) {
 	'use strict';
 
-	var methods = {
-		destroy: function () {
-			var $t = $(this),
-			$stickyHead = $t.siblings('.sticky-thead'),
-			$stickyCol = $t.siblings('.sticky-col'),
-			$stickyInsct = $t.siblings('.sticky-intersect');
-
-			if ($t.hasClass('sticky-enabled')) {
-				$stickyHead.remove();
-				$stickyCol.remove();
-				$stickyInsct.remove();
-
-				$t.unwrap();
-				$t.removeClass('sticky-enabled');
-				//todo: clear events...
-			}
-		}
+	var pluginName = 'stickyTable',
+	defaults = {
+		copyTableClass: true, //copies table classes to sticky tables
+		copyEvents: false, //copy events on headers and cols to sticky tables
+		overflowy: false //if true limits height of table to height of parent element   
 	};
 
-	$.fn.stickytable = function (options) {
+	function StickyTable(element, options) {
+		this.element = element;
+		this._defaults = defaults;
+		this._name = pluginName;
+		this.options = $.extend({}, defaults);
 
-		if (!$(this).is("table")) {
+		if (typeof options === 'string' || options instanceof String) {
+			if (this[options] !== undefined && $.isFunction(this[options])) {
+				this[options]();
+			}
+			return;
+		} else {
+			this.options = $.extend({}, defaults, options);
+		}
+
+		this.init();
+	}
+
+	StickyTable.prototype.init = function () {
+		var $w = $(window),
+			$t = $(this.element),
+			classList = [],
+			$thead,
+			$col,
+			$stickyHead,
+			$stickyCol,
+			$stickyInsct,
+			$stickyWrap,
+			setWidths,
+			repositionStickyHead,
+			repositionStickyCol,
+			calcAllowance;
+
+		if (!$(this.element).is("table")) {
 			throw new Error('Sticky Table must be called on a table!');
 		}
 
-		if (methods[options]) {
-			return methods[options].apply(this, Array.prototype.slice.call(arguments, 1));
-		}
-
 		//don't run this function again on same element!
-		if ($(this).hasClass("sticky-enabled")) {
+		if ($(this.element).hasClass("sticky-enabled")) {
 			return;
 		}
 
-		var settings = $.extend({
-			copyTableClass: true, //copies table classes to sticky tables
-			copyEvents : false, //copy events on headers and cols to sticky tables
-			overflowy : false //if true limits height of table to height of parent element
-		}, options),
-
-		$w = $(window),
-		$t = $(this),
-		classList = [],
-		$thead,
-		$col,
-		$stickyHead,
-		$stickyCol,
-		$stickyInsct,
-		$stickyWrap,
-		setWidths,
-		repositionStickyHead,
-		repositionStickyCol,
-		calcAllowance;
-
 		if ($t.find('thead').length > 0 && $t.find('th').length > 0) {
 			// Clone <thead>
-			$thead = $t.find('thead').clone(settings.copyEvents);
-			$col = $t.find('thead, tbody').clone(settings.copyEvents);
+			$thead = $t.find('thead').clone(this.options.copyEvents);
+			$col = $t.find('thead, tbody').clone(this.options.copyEvents);
 
 			// Add class, remove margins, reset width and wrap table
-			$t
-			.css({
+			$t.css({
 				margin: 0,
 				width: '100%'
 			}).wrap('<div class="sticky-wrap" />');
 
-			if (settings.overflowy) {
+			if (this.options.overflowy) {
 				$t.parent().addClass('overflow-y');
 			}
 
 			if ($t.attr('class')) {
 				classList = $t.attr('class').split(/\s+/);
 			}
-			
 
 			$t.addClass('sticky-enabled');
 
@@ -107,7 +101,7 @@
 			$stickyInsct = $t.siblings('.sticky-intersect');
 			$stickyWrap = $t.parent('.sticky-wrap');
 
-			if (settings.copyTableClass) {
+			if (this.options.copyTableClass) {
 				$.each(classList, function (index, item) {
 					$stickyHead.addClass(item);
 					$stickyCol.addClass(item);
@@ -117,8 +111,7 @@
 
 			$stickyHead.append($thead);
 
-			$stickyCol
-			.append($col)
+			$stickyCol.append($col)
 				.find('thead th:gt(0)').remove()
 				.end()
 				.find('tbody td').remove();
@@ -127,14 +120,13 @@
 			$stickyInsct.find('th').height($t.find('thead th:first-child').height());
 
 			setWidths = function () {
-				$t
-				.find('thead th').each(function (i) {
+				$t.find('thead th').each(function (i) {
 					$stickyHead.find('th').eq(i).width($(this).width());
 				})
-				.end()
-				.find('tr').each(function (i) {
-					$stickyCol.find('tr').eq(i).height($(this).height());
-				});
+					.end()
+					.find('tr').each(function (i) {
+						$stickyCol.find('tr').eq(i).height($(this).height());
+					});
 
 				// Set width of sticky table head
 				$stickyHead.width($t.width());
@@ -192,9 +184,12 @@
 					});
 				} else {
 					// When left of wrapping parent is in view
-					$stickyCol
-					.css({ opacity: 0 })
-					.add($stickyInsct).css({ left: 0 });
+					$stickyCol.css({
+						opacity: 0
+					})
+						.add($stickyInsct).css({
+							left: 0
+						});
 				}
 			};
 
@@ -202,7 +197,7 @@
 				var a = 0;
 				// Calculate allowance
 				$t.find('tbody tr:lt(3)').each(function () {
-					a += $(this).height();
+					a += $t.height();
 				});
 
 				// Set fail safe limit (last three row might be too tall)
@@ -223,17 +218,51 @@
 				repositionStickyCol();
 			}));
 
-			$w
-			.load(setWidths)
-			.resize($.debounce(250, function () {
-				setWidths();
-				repositionStickyHead();
-				repositionStickyCol();
-			}))
-			.scroll($.throttle(15, repositionStickyHead));
+			$w.load(setWidths)
+				.resize($.debounce(250, function () {
+					setWidths();
+					repositionStickyHead();
+					repositionStickyCol();
+				}))
+				.scroll($.throttle(15, repositionStickyHead));
 		}
-
-		return this;
 	};
 
-}(jQuery));
+	StickyTable.prototype.destroy = function () {
+		var $t = $(this.element),
+			$stickyHead = $t.siblings('.sticky-thead'),
+			$stickyCol = $t.siblings('.sticky-col'),
+			$stickyInsct = $t.siblings('.sticky-intersect');
+
+		this.options = $.extend({}, defaults);
+
+		if ($t.hasClass('sticky-enabled')) {
+			$stickyHead.remove();
+			$stickyCol.remove();
+			$stickyInsct.remove();
+
+			$t.unwrap();
+			$t.removeClass('sticky-enabled');
+			//todo: clear events...
+		}
+	};
+
+	// A really lightweight plugin wrapper around the constructor, 
+	// preventing against multiple instantiations
+	$.fn[pluginName] = function (options) {
+		return this.each(function () {
+			if (!$.data(this, 'plugin_' + pluginName)) {
+				$.data(this, 'plugin_' + pluginName,
+				new StickyTable(this, options));
+			} else {
+				var p = $.data(this, 'plugin_' + pluginName);
+				if (typeof options === 'string' || options instanceof String) {
+					if (p[options] !== undefined && $.isFunction(p[options])) {
+						p[options]();
+					}
+				}
+			}
+		});
+	};
+
+}(jQuery, window, document));
