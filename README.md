@@ -3,7 +3,7 @@ jQuery Stick Table Headers
 
 This is a version of the sticky table code originally written by Terry Munn, wrapped in a jquery plugin to make it more reusable. I also added some new options and functions.
 
-[DEMO](http://jsfiddle.net/jchip/sd12fsdo/7/)
+[DEMO](http://jsfiddle.net/jchip/sd12fsdo/)
 
 ## Dependencies
 
