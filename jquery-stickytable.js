@@ -205,18 +205,18 @@
 
 			setWidths();
 
-			$t.parent('.sticky-wrap').scroll($.throttle(15, function () {
+			$t.parent('.sticky-wrap').scroll(function () {
 				repositionStickyHead();
 				repositionStickyCol();
-			}));
+			});
 
 			$w.load(setWidths)
-				.resize($.debounce(250, function () {
+				.resize($.debounce(5000, function () {
 					setWidths();
 					repositionStickyHead();
 					repositionStickyCol();
 				}))
-				.scroll($.throttle(15, repositionStickyHead));
+				.scroll(repositionStickyHead);
 		}
 	};
 
@@ -264,3 +264,17 @@
 	};
 
 }(jQuery, window, document));
+//#### END stickyTable plugin ####
+
+
+//load stickyTable with overflowy option
+$('#myTable').stickyTable({overflowy: true});
+
+$('#destroyBtn').click(function() {
+    //removes sticky table classes and elements
+    $('#myTable').stickyTable('destroy');
+});
+
+$('#initBtn').click(function() {
+    $('#myTable').stickyTable();
+});
