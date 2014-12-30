@@ -211,7 +211,7 @@
 			});
 
 			$w.load(setWidths)
-				.resize($.debounce(5000, function () {
+				.resize($.debounce(250, function () {
 					setWidths();
 					repositionStickyHead();
 					repositionStickyCol();
@@ -264,17 +264,3 @@
 	};
 
 }(jQuery, window, document));
-//#### END stickyTable plugin ####
-
-
-//load stickyTable with overflowy option
-$('#myTable').stickyTable({overflowy: true});
-
-$('#destroyBtn').click(function() {
-    //removes sticky table classes and elements
-    $('#myTable').stickyTable('destroy');
-});
-
-$('#initBtn').click(function() {
-    $('#myTable').stickyTable();
-});
