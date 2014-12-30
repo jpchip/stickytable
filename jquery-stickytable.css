@@ -12,7 +12,6 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	transition: all .125s ease-in-out;
 	z-index: 50;
 	width: auto; /* Prevent table from stretching to full size */
 }

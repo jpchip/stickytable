@@ -205,10 +205,10 @@
 
 			setWidths();
 
-			$t.parent('.sticky-wrap').scroll($.throttle(15, function () {
+			$t.parent('.sticky-wrap').scroll(function () {
 				repositionStickyHead();
 				repositionStickyCol();
-			}));
+			});
 
 			$w.load(setWidths)
 				.resize($.debounce(250, function () {
@@ -216,7 +216,7 @@
 					repositionStickyHead();
 					repositionStickyCol();
 				}))
-				.scroll($.throttle(15, repositionStickyHead));
+				.scroll(repositionStickyHead);
 		}
 	};
 
