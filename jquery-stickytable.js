@@ -1,5 +1,5 @@
 /*
- * jQuery Stick Table Headers - v1.0 - 10/17/2014
+ * jQuery Stick Table Headers - v1.1 - 10/17/2014
  * https://github.com/jpchip/stickytable
  * 
  * Wrapped version of sticky table headers code here:
