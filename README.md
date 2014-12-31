@@ -3,7 +3,7 @@ jQuery Stick Table Headers
 
 This is a version of the sticky table code originally written by Terry Munn, wrapped in a jquery plugin to make it more reusable. I also added some new options and functions.
 
-[DEMO](http://jsfiddle.net/jchip/ds3afgyv/)
+[DEMO](http://jsfiddle.net/jchip/07ryyn0c/)
 
 ## Dependencies
 
@@ -62,6 +62,24 @@ Completely removes sticky table classes and elements and destroys the instance.
 * If plugin has not been initialised when calling a method
 * If method is private
 * If method does not exist
+
+## Changelog:
+
+### Version 1.1.1 - December 31 2014
+
+* Added changelog to readme
+* Added version number in comment of css
+* Removed dates from code comments
+* Added bower.json
+* Added example index.html file
+
+### Version 1.1.0 - December 30 2014
+
+* Removed bouncing effect on header and column when scrolling as it was generally annoying.
+
+### Version 1.0 - October 22 2014
+
+* First release
 
 ## Source
 

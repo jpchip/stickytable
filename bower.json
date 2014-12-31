@@ -1,0 +1,27 @@
+{
+  "name": "jquery-stickytable",
+  "version": "1.1.1",
+  "homepage": "https://github.com/jpchip/stickytable",
+  "authors": [
+    "Jared Chapiewsky <chapiewsky@earthit.com>"
+  ],
+  "description": "jQuery Stick Table Headers plugin",
+  "main": "jquery-stickytable.js",
+  "keywords": [
+    "table",
+    "sticky",
+    "headers",
+    "column",
+    "jquery",
+    "plugin"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "bower_components",
+	"example"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3"
+  }
+}

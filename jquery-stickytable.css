@@ -1,4 +1,7 @@
-﻿/* For appearance */
+﻿/*
+ * jQuery Stick Table Headers - v1.1.1
+ * https://github.com/jpchip/stickytable
+ */
 .sticky-wrap {
 	overflow-x: auto;
 	overflow-y: hidden;
