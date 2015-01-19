@@ -65,6 +65,10 @@ Completely removes sticky table classes and elements and destroys the instance.
 
 ## Changelog:
 
+### Version 1.1.2 - January 19 2015
+
+* Updated jquery version dependecy in bower.json
+
 ### Version 1.1.1 - December 31 2014
 
 * Added changelog to readme
