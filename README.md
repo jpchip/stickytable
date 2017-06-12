@@ -5,7 +5,7 @@ This is a version of the sticky table code originally written by Terry Munn, wra
 
 [DEMO](http://jsfiddle.net/jchip/07ryyn0c/)
 
-## Dependencies
+## External Dependencies
 
 * jQuery 2.1
 * [jQuery throttle / debounce - v1.1 - 3/7/2010](http://benalman.com/projects/jquery-throttle-debounce-plugin/)
@@ -64,6 +64,10 @@ Completely removes sticky table classes and elements and destroys the instance.
 * If method does not exist
 
 ## Changelog:
+
+### Version 2.0.0 - June 6 2017
+
+* Published to NPM
 
 ### Version 1.1.2 - January 19 2015
 
