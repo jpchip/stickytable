@@ -22,7 +22,7 @@
     "plugin",
     "scroll"
   ],
-  "author": "Jared Chapiewsky",
+  "author": "Jared Chapiewsky <chapiewsky@earthlinginteractive.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jpchip/stickytable/issues"
