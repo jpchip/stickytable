@@ -1,4 +1,4 @@
-jQuery Stick Table Headers
+jQuery Sticky Table Headers
 ===========
 
 This is a version of the sticky table code originally written by Terry Munn, wrapped in a jquery plugin to make it more reusable. I also added some new options and functions.
