@@ -3,17 +3,34 @@ jQuery Sticky Table Headers
 
 This is a version of the sticky table code originally written by Terry Munn, wrapped in a jquery plugin to make it more reusable. I also added some new options and functions.
 
-[DEMO](http://jsfiddle.net/jchip/07ryyn0c/)
+* [JSFiddle Demo](http://jsfiddle.net/jchip/07ryyn0c/)
+* [Example](http://htmlpreview.github.io/?https://github.com/jpchip/stickytable/blob/publish-to-npm/example/index.html)
 
 ## External Dependencies
 
 * jQuery 2.1
 * [jQuery throttle / debounce - v1.1 - 3/7/2010](http://benalman.com/projects/jquery-throttle-debounce-plugin/)
 
+## Install
+
+```npm
+npm install --save jquery-stickytable 
+```
+
 ## Usage
 
+Include Jquery, jquery-throttle-debounce, and jquery-stickytable in your head:
+
+```html
+<script src="jquery.js"></script>
+<script src="jquery.ba-throttle-debounce.min.js"></script>
+<script src="jquery-stickytable.js"></script>
+```
+
+Load stickyTable on your table:
+
 ```javascript
-  $('#myTable').stickyTable(options);
+$('#myTable').stickyTable(options);
 ```
 
 By default just the header of the table (eg. the thead) is sticky. Biaxial headers are possible — this is for situations where both horizontal and vertical headers are needed. To enable, just wrap the first element in each tbody row in a th instead of a td:
