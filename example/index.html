@@ -1,26 +1,26 @@
 <html>
 	<head>
-		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width">
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<script src="../shared/jquery.ba-throttle-debounce.min.js"></script>
 		<script src="../jquery-stickytable.js"></script>
 		<link rel="stylesheet" type="text/css" href="../jquery-stickytable.css">
 		
-		<script>
-		$( document ).ready(function() {
-			//load stickyTable with overflowy option
-			$('#myTable').stickyTable({overflowy: true});
+		<script type="text/javascript">
+			$(function() {
+				//load stickyTable with overflowy option
+				$('#myTable').stickyTable({overflowy: true});
 
-			$('#destroyBtn').click(function() {
-				//removes sticky table classes and elements
-				$('#myTable').stickyTable('destroy');
-			});
+				$('#destroyBtn').click(function() {
+					//removes sticky table classes and elements
+					$('#myTable').stickyTable('destroy');
+				});
 
-			$('#initBtn').click(function() {
-				$('#myTable').stickyTable();
+				$('#initBtn').click(function() {
+					$('#myTable').stickyTable();
+				});
 			});
-		});
 		</script>
-		
 	</head>
 <body>
 	<a href='#' class="btn btn-primary" id="destroyBtn">Destroy StickyTable</a>

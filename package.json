@@ -1,0 +1,31 @@
+{
+  "name": "jquery-stickytable",
+  "version": "2.0.0",
+  "description": "jQuery Sticky Table Headers plugin",
+  "main": "jquery-stickytable.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpchip/stickytable.git"
+  },
+  "keywords": [
+    "table",
+    "sticky",
+    "headers",
+    "column",
+    "jquery",
+    "plugin",
+    "scroll"
+  ],
+  "author": "Jared Chapiewsky <chapiewsky@earthlinginteractive.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jpchip/stickytable/issues"
+  },
+  "homepage": "https://github.com/jpchip/stickytable#readme"
+}

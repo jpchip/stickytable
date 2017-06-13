@@ -1,19 +1,36 @@
-jQuery Stick Table Headers
+jQuery Sticky Table Headers
 ===========
 
 This is a version of the sticky table code originally written by Terry Munn, wrapped in a jquery plugin to make it more reusable. I also added some new options and functions.
 
-[DEMO](http://jsfiddle.net/jchip/07ryyn0c/)
+* [JSFiddle Demo](http://jsfiddle.net/jchip/07ryyn0c/)
+* [Example](http://htmlpreview.github.io/?https://github.com/jpchip/stickytable/blob/publish-to-npm/example/index.html)
 
-## Dependencies
+## External Dependencies
 
-* jQuery 2.1
+* jQuery >= 1.12.4
 * [jQuery throttle / debounce - v1.1 - 3/7/2010](http://benalman.com/projects/jquery-throttle-debounce-plugin/)
+
+## Install
+
+```npm
+npm install --save jquery-stickytable 
+```
 
 ## Usage
 
+Include Jquery, jquery-throttle-debounce, and jquery-stickytable in your head:
+
+```html
+<script src="jquery.js"></script>
+<script src="jquery.ba-throttle-debounce.min.js"></script>
+<script src="jquery-stickytable.js"></script>
+```
+
+Load stickyTable on your table:
+
 ```javascript
-  $('#myTable').stickyTable(options);
+$('#myTable').stickyTable(options);
 ```
 
 By default just the header of the table (eg. the thead) is sticky. Biaxial headers are possible — this is for situations where both horizontal and vertical headers are needed. To enable, just wrap the first element in each tbody row in a th instead of a td:
@@ -62,28 +79,6 @@ Completely removes sticky table classes and elements and destroys the instance.
 * If plugin has not been initialised when calling a method
 * If method is private
 * If method does not exist
-
-## Changelog:
-
-### Version 1.1.2 - January 19 2015
-
-* Updated jquery version dependecy in bower.json
-
-### Version 1.1.1 - December 31 2014
-
-* Added changelog to readme
-* Added version number in comment of css
-* Removed dates from code comments
-* Added bower.json
-* Added example index.html file
-
-### Version 1.1.0 - December 30 2014
-
-* Removed bouncing effect on header and column when scrolling as it was generally annoying.
-
-### Version 1.0 - October 22 2014
-
-* First release
 
 ## Source
 
