@@ -8,7 +8,7 @@ This is a version of the sticky table code originally written by Terry Munn, wra
 
 ## External Dependencies
 
-* jQuery 2.1
+* jQuery >= 1.12.4
 * [jQuery throttle / debounce - v1.1 - 3/7/2010](http://benalman.com/projects/jquery-throttle-debounce-plugin/)
 
 ## Install
