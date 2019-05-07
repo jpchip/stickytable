@@ -4,12 +4,11 @@ jQuery Sticky Table Headers
 This is a version of the sticky table code originally written by Terry Munn, wrapped in a jquery plugin to make it more reusable. I also added some new options and functions.
 
 * [JSFiddle Demo](http://jsfiddle.net/jchip/07ryyn0c/)
-* [Example](http://htmlpreview.github.io/?https://github.com/jpchip/stickytable/blob/publish-to-npm/example/index.html)
+* [Example](http://jpchip.github.io/stickytable/example/)
 
 ## External Dependencies
 
 * jQuery >= 1.12.4
-* [jQuery throttle / debounce - v1.1 - 3/7/2010](http://benalman.com/projects/jquery-throttle-debounce-plugin/)
 
 ## Install
 
@@ -22,9 +21,9 @@ npm install --save jquery-stickytable
 Include Jquery, jquery-throttle-debounce, and jquery-stickytable in your head:
 
 ```html
-<script src="jquery.js"></script>
-<script src="jquery.ba-throttle-debounce.min.js"></script>
-<script src="jquery-stickytable.js"></script>
+<link rel="stylesheet" type="text/css" href="path/to/jquery-stickytable.css">
+<script src="path/to/jquery.js"></script>
+<script src="path/to/jquery-stickytable.js"></script>
 ```
 
 Load stickyTable on your table:

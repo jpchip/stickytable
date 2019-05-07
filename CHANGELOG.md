@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## Version 3.0.0 - May 7 2019
+
+*
+
 ## Version 2.0.0 - June 6 2017
 
 * Published to NPM

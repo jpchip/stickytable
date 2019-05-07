@@ -1,12 +1,16 @@
 {
   "name": "jquery-stickytable",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "jQuery Sticky Table Headers plugin",
-  "main": "jquery-stickytable.js",
+  "main": "dist/jquery-stickytable.js",
+  "module": "dist/jquery-stickytable.esm.js",
+  "browser": "dist/jquery-stickytable.js",
   "directories": {
     "example": "example"
   },
   "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,5 +31,14 @@
   "bugs": {
     "url": "https://github.com/jpchip/stickytable/issues"
   },
-  "homepage": "https://github.com/jpchip/stickytable#readme"
+  "homepage": "https://github.com/jpchip/stickytable#readme",
+  "devDependencies": {
+    "rollup": "~1.11.3",
+    "rollup-plugin-commonjs": "~9.3.4",
+    "rollup-plugin-node-resolve": "~4.2.3",
+    "rollup-plugin-uglify": "~6.0.2"
+  },
+  "peerDependencies": {
+    "jQuery": ">=1.12.4"
+  }
 }
