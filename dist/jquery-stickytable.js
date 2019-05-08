@@ -227,7 +227,7 @@
 				});
 
 				$w.on('load', setWidths)
-					.resize($.debounce(250, function () {
+					.resize($.debounce(500, function () {
 						setWidths();
 						repositionStickyHead();
 						repositionStickyCol();

@@ -5,6 +5,7 @@ Changelog
 
 * Fix script to support newer versions of jquery
 * Bundle script to dist folder, create esm version
+* Increase debounce time
 * Update readme and examples
 
 ## Version 2.0.0 - June 6 2017
