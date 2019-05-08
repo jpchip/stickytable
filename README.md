@@ -1,30 +1,42 @@
-jQuery Sticky Table Headers
-===========
+# jQuery Sticky Table Headers
+> Make your table headers sticky
 
 This is a version of the sticky table code originally written by Terry Munn, wrapped in a jquery plugin to make it more reusable. I also added some new options and functions.
 
-* [JSFiddle Demo](http://jsfiddle.net/jchip/07ryyn0c/)
 * [Example](http://jpchip.github.io/stickytable/example/)
 
-## External Dependencies
+## Installing / Getting started
 
-* jQuery >= 1.12.4
-
-## Install
+Install via NPM:
 
 ```npm
 npm install --save jquery-stickytable 
 ```
 
-## Usage
+Include jQuery(>=1.12.4) and jquery-stickytable in your head:
 
-Include Jquery, jquery-throttle-debounce, and jquery-stickytable in your head:
+```html
+<script src="path/to/jquery.js"></script>
+<script src="path/to/jquery-stickytable.min.js"></script>
+```
+
+and the css:
 
 ```html
 <link rel="stylesheet" type="text/css" href="path/to/jquery-stickytable.css">
-<script src="path/to/jquery.js"></script>
-<script src="path/to/jquery-stickytable.js"></script>
 ```
+
+Files can be found in dist folder:
+
+```text
+dist/
+├── jquery-stickytable.css
+├── jquery-stickytable.js        (UMD)
+├── jquery-stickytable.min.js    (UMD, compressed)
+└── jquery-stickytable.esm.js    (ES Module, includes css)
+```
+
+## Usage
 
 Load stickyTable on your table:
 
@@ -32,7 +44,9 @@ Load stickyTable on your table:
 $('#myTable').stickyTable(options);
 ```
 
-By default just the header of the table (eg. the thead) is sticky. Biaxial headers are possible — this is for situations where both horizontal and vertical headers are needed. To enable, just wrap the first element in each tbody row in a th instead of a td:
+By default just the header of the table (eg. the thead) is sticky. Biaxial headers are 
+possible — this is for situations where both horizontal and vertical headers are needed. 
+To enable, just wrap the first element in each tbody row in a th instead of a td:
 
 ```html
   <tbody>
@@ -48,17 +62,11 @@ By default just the header of the table (eg. the thead) is sticky. Biaxial heade
 
 ## Options
 
-### copyTableClass
-
-A boolean which when true copies any classes on the target table to the sticky table. Default is true.
-
-### copyEvents
-
-A boolean which when true copies any events on the target table to the sticky table. An example would be if there was a click event on a th element in the thead to do sorting, this would carry over to the sticky column header th. Default is false.
-
-### overflowy
-
-A boolean which when true adds an overflow-y class to the sticky table wrapper (ie. sticky-wrap class). This means the table will scroll vertically and only be as tall as it's parent div (see .sticky-wrap.overflow-y in css). Default is false.
+| Option  | Description |
+| ------------- | ------------- |
+| copyTableClass  | When true copies any classes on the target table to the sticky table. Default is true.  |
+| copyEvents  | When true copies any events on the target table to the sticky table. An example would be if there was a click event on a th element in the thead to do sorting, this would carry over to the sticky column header th. Default is false. |
+| overflowy | When true adds an overflow-y class to the sticky table wrapper (ie. sticky-wrap class). This means the table will scroll vertically and only be as tall as it's parent div (see .sticky-wrap.overflow-y in css). Default is false.|
 
 ## Methods
 

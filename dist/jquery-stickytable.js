@@ -1,1 +1,284 @@
-!function(t){"function"==typeof define&&define.amd?define(t):t()}(function(){"use strict";var t,l,s,e,p,u,i,n;function o(t,e){this.element=t,this._defaults=n,this._name=i,this.options=p.extend({},n,e),this._init()}t=window,(e=t.jQuery||t.Cowboy||(t.Cowboy={})).throttle=s=function(n,o,a,d){var c,h=0;function t(){var t=this,e=+new Date-h,i=arguments;function s(){h=+new Date,a.apply(t,i)}d&&!c&&s(),c&&clearTimeout(c),d===l&&n<e?s():!0!==o&&(c=setTimeout(d?function(){c=l}:s,d===l?n-e:n))}return"boolean"!=typeof o&&(d=a,a=o,o=l),e.guid&&(t.guid=a.guid=a.guid||e.guid++),t},e.debounce=function(t,e,i){return i===l?s(t,e,!1):s(t,i,!1!==e)},p=jQuery,u=window,document,n={copyTableClass:!0,copyEvents:!(i="stickyTable"),overflowy:!1},o.prototype._init=function(){var t,e,i,s,n,o,a,d,c,h,l=p(u),r=p(this.element),f=[];p(this.element).is("table")||p.error("Target element must be a table"),p(this.element).hasClass("sticky-enabled")||0<r.find("thead").length&&0<r.find("th").length&&(t=r.find("thead").clone(this.options.copyEvents),e=r.find("thead, tbody").clone(this.options.copyEvents),r.css({margin:0,width:"100%"}).wrap('<div class="sticky-wrap" />'),this.options.overflowy&&r.parent().addClass("overflow-y"),r.attr("class")&&(f=r.attr("class").split(/\s+/)),r.addClass("sticky-enabled"),r.after('<table class="sticky-thead" />'),0<r.find("tbody th").length&&r.after('<table class="sticky-col" /><table class="sticky-intersect" />'),i=r.siblings(".sticky-thead"),s=r.siblings(".sticky-col"),n=r.siblings(".sticky-intersect"),o=r.parent(".sticky-wrap"),this.options.copyTableClass&&p.each(f,function(t,e){i.addClass(e),s.addClass(e),n.addClass(e)}),i.append(t),s.append(e).find("thead th:gt(0)").remove().end().find("tbody td").remove(),n.html("<thead><tr><th>"+r.find("thead th:first-child").html()+"</th></tr></thead>"),n.find("th").height(r.find("thead th:first-child").height()),d=function(){var t=h();r.height()>o.height()?0<o.scrollTop()?i.add(n).css({opacity:1,top:o.scrollTop()}):i.add(n).css({opacity:0,top:0}):l.scrollTop()>r.offset().top&&l.scrollTop()<r.offset().top+r.outerHeight()-t?i.add(n).css({opacity:1,top:l.scrollTop()-r.offset().top}):i.add(n).css({opacity:0,top:0})},c=function(){0<o.scrollLeft()?s.add(n).css({opacity:1,left:o.scrollLeft()}):s.css({opacity:0}).add(n).css({left:0})},h=function(){var t=0;return r.find("tbody tr:lt(3)").each(function(){t+=r.height()}),t>.25*l.height()&&(t=.25*l.height()),t+=i.height()},(a=function(){r.find("thead th").each(function(t){i.find("th").eq(t).width(p(this).width())}).end().find("tr").each(function(t){s.find("tr").eq(t).height(p(this).height())}),i.width(r.width()),s.find("th").add(n.find("th")).width(r.find("thead th").width())})(),r.parent(".sticky-wrap").scroll(function(){d(),c()}),l.on("load",a).resize(p.debounce(250,function(){a(),d(),c()})).scroll(d))},o.prototype.destroy=function(){var t=p(this.element),e=t.siblings(".sticky-thead"),i=t.siblings(".sticky-col"),s=t.siblings(".sticky-intersect");this.options=p.extend({},n),t.hasClass("sticky-enabled")&&(e.remove(),i.remove(),s.remove(),t.unwrap(),t.removeClass("sticky-enabled")),p.removeData(this.element,"plugin_"+this._name)},p.fn[i]=function(e){return this.each(function(){var t=p.data(this,"plugin_"+i);t?("string"==typeof e||e instanceof String)&&(void 0!==t[e]&&p.isFunction(t[e])?-1!==e.indexOf("_")?p.error("Method "+e+" is private!"):t[e](Array.prototype.slice.call(arguments,1)):p.error("Method "+e+" does not exist.")):"object"!=typeof e&&e?p.error("Plugin must be initialised before using method: "+e):p.data(this,"plugin_"+i,new o(this,e))})}});
+(function (factory) {
+	typeof define === 'function' && define.amd ? define(factory) :
+	factory();
+}(function () { 'use strict';
+
+	/**
+	 * jQuery throttle / debounce - v1.1 - 3/7/2010
+	 * http://benalman.com/projects/jquery-throttle-debounce-plugin/
+	 *
+	 * Copyright (c) 2010 "Cowboy" Ben Alman
+	 * Dual licensed under the MIT and GPL licenses.
+	 * http://benalman.com/about/license/
+	 * @preserve
+	 */
+	(function (b, c) { var $ = b.jQuery || b.Cowboy || (b.Cowboy = {}), a; $.throttle = a = function (e, f, j, i) { var h, d = 0; if (typeof f !== "boolean") { i = j; j = f; f = c; } function g() { var o = this, m = +new Date() - d, n = arguments; function l() { d = +new Date(); j.apply(o, n); } function k() { h = c; } if (i && !h) { l(); } h && clearTimeout(h); if (i === c && m > e) { l(); } else { if (f !== true) { h = setTimeout(i ? k : l, i === c ? e - m : e); } } } if ($.guid) { g.guid = j.guid = j.guid || $.guid++; } return g }; $.debounce = function (d, e, f) { return f === c ? a(d, e, false) : a(d, f, e !== false) }; })(window);
+
+	/**
+	 * jQuery Stick Table Headers - v3.0.0
+	 * https://github.com/jpchip/stickytable
+	 *
+	 * Wrapped version of sticky table headers code here:
+	 * http://tympanus.net/codrops/2014/01/09/sticky-table-headers-columns/
+	 * http://tympanus.net/Tutorials/StickyTableHeaders/
+	 *
+	 * CSS located in jquery-stickytable.css
+	 *
+	 * Depends:
+	 * jQuery
+	 * jQuery throttle / debounce - v1.1 - 3/7/2010
+	 * http://benalman.com/projects/jquery-throttle-debounce-plugin/
+	 * @preserve
+	 */
+
+	(function ($, window, document, undefined$1) {
+
+		var pluginName = 'stickyTable',
+		defaults = {
+			copyTableClass: true, //copies table classes to sticky tables
+			copyEvents: false, //copy events on headers and cols to sticky tables
+			overflowy: false //if true limits height of table to height of parent element
+		};
+
+		function StickyTable(element, options) {
+			this.element = element;
+			this._defaults = defaults;
+			this._name = pluginName;
+
+			this.options = $.extend({}, defaults, options);
+
+			this._init();
+		}
+
+		StickyTable.prototype._init = function () {
+			var $w = $(window),
+				$t = $(this.element),
+				classList = [],
+				$thead,
+				$col,
+				$stickyHead,
+				$stickyCol,
+				$stickyInsct,
+				$stickyWrap,
+				setWidths,
+				repositionStickyHead,
+				repositionStickyCol,
+				calcAllowance;
+
+			if (!$(this.element).is("table")) {
+				$.error('Target element must be a table');
+			}
+
+			//don't run this function again on same element!
+			if ($(this.element).hasClass("sticky-enabled")) {
+				return;
+			}
+
+			if ($t.find('thead').length > 0 && $t.find('th').length > 0) {
+				// Clone <thead>
+				$thead = $t.find('thead').clone(this.options.copyEvents);
+				$col = $t.find('thead, tbody').clone(this.options.copyEvents);
+
+				// Add class, remove margins, reset width and wrap table
+				$t.css({
+					margin: 0,
+					width: '100%'
+				}).wrap('<div class="sticky-wrap" />');
+
+				if (this.options.overflowy) {
+					$t.parent().addClass('overflow-y');
+				}
+
+				if ($t.attr('class')) {
+					classList = $t.attr('class').split(/\s+/);
+				}
+
+				$t.addClass('sticky-enabled');
+
+				// Create new sticky table head (basic)
+				$t.after('<table class="sticky-thead" />');
+
+				// If <tbody> contains <th>, then we create sticky column and intersect (advanced)
+				if ($t.find('tbody th').length > 0) {
+					$t.after('<table class="sticky-col" /><table class="sticky-intersect" />');
+				}
+
+				// Create shorthand for things
+				$stickyHead = $t.siblings('.sticky-thead');
+				$stickyCol = $t.siblings('.sticky-col');
+				$stickyInsct = $t.siblings('.sticky-intersect');
+				$stickyWrap = $t.parent('.sticky-wrap');
+
+				if (this.options.copyTableClass) {
+					$.each(classList, function (index, item) {
+						$stickyHead.addClass(item);
+						$stickyCol.addClass(item);
+						$stickyInsct.addClass(item);
+					});
+				}
+
+				$stickyHead.append($thead);
+
+				$stickyCol.append($col)
+					.find('thead th:gt(0)').remove()
+					.end()
+					.find('tbody td').remove();
+
+				$stickyInsct.html('<thead><tr><th>' + $t.find('thead th:first-child').html() + '</th></tr></thead>');
+				$stickyInsct.find('th').height($t.find('thead th:first-child').height());
+
+				setWidths = function () {
+					$t.find('thead th').each(function (i) {
+						$stickyHead.find('th').eq(i).width($(this).width());
+					})
+						.end()
+						.find('tr').each(function (i) {
+							$stickyCol.find('tr').eq(i).height($(this).height());
+						});
+
+					// Set width of sticky table head
+					$stickyHead.width($t.width());
+
+					// Set width of sticky table col
+					$stickyCol.find('th').add($stickyInsct.find('th')).width($t.find('thead th').width());
+				};
+
+				repositionStickyHead = function () {
+					// Return value of calculated allowance
+					var allowance = calcAllowance();
+
+					// Check if wrapper parent is overflowing along the y-axis
+					if ($t.height() > $stickyWrap.height()) {
+						// If it is overflowing (advanced layout)
+						// Position sticky header based on wrapper scrollTop()
+						if ($stickyWrap.scrollTop() > 0) {
+							// When top of wrapping parent is out of view
+							$stickyHead.add($stickyInsct).css({
+								opacity: 1,
+								top: $stickyWrap.scrollTop()
+							});
+						} else {
+							// When top of wrapping parent is in view
+							$stickyHead.add($stickyInsct).css({
+								opacity: 0,
+								top: 0
+							});
+						}
+					} else {
+						// If it is not overflowing (basic layout)
+						// Position sticky header based on viewport scrollTop
+						if ($w.scrollTop() > $t.offset().top && $w.scrollTop() < $t.offset().top + $t.outerHeight() - allowance) {
+							// When top of viewport is in the table itself
+							$stickyHead.add($stickyInsct).css({
+								opacity: 1,
+								top: $w.scrollTop() - $t.offset().top
+							});
+						} else {
+							// When top of viewport is above or below table
+							$stickyHead.add($stickyInsct).css({
+								opacity: 0,
+								top: 0
+							});
+						}
+					}
+				};
+
+				repositionStickyCol = function () {
+					if ($stickyWrap.scrollLeft() > 0) {
+						// When left of wrapping parent is out of view
+						$stickyCol.add($stickyInsct).css({
+							opacity: 1,
+							left: $stickyWrap.scrollLeft()
+						});
+					} else {
+						// When left of wrapping parent is in view
+						$stickyCol.css({
+							opacity: 0
+						})
+							.add($stickyInsct).css({
+								left: 0
+							});
+					}
+				};
+
+				calcAllowance = function () {
+					var a = 0;
+					// Calculate allowance
+					$t.find('tbody tr:lt(3)').each(function () {
+						a += $t.height();
+					});
+
+					// Set fail safe limit (last three row might be too tall)
+					// Set arbitrary limit at 0.25 of viewport height, or you can use an arbitrary pixel value
+					if (a > $w.height() * 0.25) {
+						a = $w.height() * 0.25;
+					}
+
+					// Add the height of sticky header
+					a += $stickyHead.height();
+					return a;
+				};
+
+				setWidths();
+
+				$t.parent('.sticky-wrap').scroll(function () {
+					repositionStickyHead();
+					repositionStickyCol();
+				});
+
+				$w.on('load', setWidths)
+					.resize($.debounce(250, function () {
+						setWidths();
+						repositionStickyHead();
+						repositionStickyCol();
+					}))
+					.scroll(repositionStickyHead);
+			}
+		};
+
+		StickyTable.prototype.destroy = function () {
+			var $t = $(this.element),
+				$stickyHead = $t.siblings('.sticky-thead'),
+				$stickyCol = $t.siblings('.sticky-col'),
+				$stickyInsct = $t.siblings('.sticky-intersect');
+
+			this.options = $.extend({}, defaults);
+
+			if ($t.hasClass('sticky-enabled')) {
+				$stickyHead.remove();
+				$stickyCol.remove();
+				$stickyInsct.remove();
+
+				$t.unwrap();
+				$t.removeClass('sticky-enabled');
+				//todo: clear events...
+			}
+			$.removeData(this.element, 'plugin_' + this._name);
+		};
+
+		$.fn[pluginName] = function (options) {
+			return this.each(function () {
+				var instance = $.data(this, 'plugin_' + pluginName);
+				if (instance) {
+					if (typeof options === 'string' || options instanceof String) {
+						if (instance[options] !== undefined$1 && $.isFunction(instance[options])) {
+							if (options.indexOf('_') !== -1) {
+								$.error('Method ' + options + ' is private!');
+							} else {
+								instance[options](Array.prototype.slice.call(arguments, 1));
+							}
+						} else {
+							$.error('Method ' + options + ' does not exist.');
+						}
+					}
+				} else if (typeof options === 'object' || !options) {
+					$.data(this, 'plugin_' + pluginName, new StickyTable(this, options));
+				} else {
+					$.error('Plugin must be initialised before using method: ' + options);
+				}
+			});
+		};
+
+	}(jQuery, window, document));
+
+}));

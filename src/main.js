@@ -1,4 +1,4 @@
-/*
+/**
  * jQuery Stick Table Headers - v3.0.0
  * https://github.com/jpchip/stickytable
  *
@@ -12,9 +12,10 @@
  * jQuery
  * jQuery throttle / debounce - v1.1 - 3/7/2010
  * http://benalman.com/projects/jquery-throttle-debounce-plugin/
- *
+ * @preserve
  */
 
+import './jquery-stickytable.css';
 import './jquery.ba-throttle-debounce.min';
 
 (function ($, window, document, undefined) {

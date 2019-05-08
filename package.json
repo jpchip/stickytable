@@ -5,12 +5,16 @@
   "main": "dist/jquery-stickytable.js",
   "module": "dist/jquery-stickytable.esm.js",
   "browser": "dist/jquery-stickytable.js",
+  "unpkg": "dist/jquery-stickytable.js",
   "directories": {
     "example": "example"
   },
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "clear": "del-cli dist",
+    "start": "rollup -c -w",
+    "compress": "uglifyjs dist/jquery-stickytable.js -o dist/jquery-stickytable.min.js -c -m --comments",
+    "release": "npm run clear && npm run build && npm run compress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,10 +37,12 @@
   },
   "homepage": "https://github.com/jpchip/stickytable#readme",
   "devDependencies": {
+    "del-cli": "~1.1.0",
     "rollup": "~1.11.3",
     "rollup-plugin-commonjs": "~9.3.4",
     "rollup-plugin-node-resolve": "~4.2.3",
-    "rollup-plugin-uglify": "~6.0.2"
+    "rollup-plugin-postcss": "^2.0.3",
+    "uglify-js": "~3.5.11"
   },
   "peerDependencies": {
     "jQuery": ">=1.12.4"
