@@ -1,19 +1,23 @@
-/*
- * jQuery Stick Table Headers - v2.0.0
+/**
+ * jQuery Stick Table Headers - v3.0.0
  * https://github.com/jpchip/stickytable
- * 
+ *
  * Wrapped version of sticky table headers code here:
  * http://tympanus.net/codrops/2014/01/09/sticky-table-headers-columns/
  * http://tympanus.net/Tutorials/StickyTableHeaders/
- * 
+ *
  * CSS located in jquery-stickytable.css
- * 
+ *
  * Depends:
  * jQuery
  * jQuery throttle / debounce - v1.1 - 3/7/2010
  * http://benalman.com/projects/jquery-throttle-debounce-plugin/
- * 
+ * @preserve
  */
+
+import './jquery-stickytable.css';
+import './jquery.ba-throttle-debounce.min';
+
 (function ($, window, document, undefined) {
 	'use strict';
 
@@ -21,7 +25,7 @@
 	defaults = {
 		copyTableClass: true, //copies table classes to sticky tables
 		copyEvents: false, //copy events on headers and cols to sticky tables
-		overflowy: false //if true limits height of table to height of parent element   
+		overflowy: false //if true limits height of table to height of parent element
 	};
 
 	function StickyTable(element, options) {
@@ -210,8 +214,8 @@
 				repositionStickyCol();
 			});
 
-			$w.load(setWidths)
-				.resize($.debounce(250, function () {
+			$w.on('load', setWidths)
+				.resize($.debounce(500, function () {
 					setWidths();
 					repositionStickyHead();
 					repositionStickyCol();
