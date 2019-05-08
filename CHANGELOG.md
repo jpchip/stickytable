@@ -1,9 +1,11 @@
 Changelog
 =========
 
-## Version 3.0.0 - May 7 2019
+## Version 3.0.0 - May 8 2019
 
-*
+* Fix script to support newer versions of jquery
+* Bundle script to dist folder, create esm version
+* Update readme and examples
 
 ## Version 2.0.0 - June 6 2017
 
@@ -13,7 +15,7 @@ Changelog
 
 ## Version 1.1.2 - January 19 2015
 
-* Updated jquery version dependecy in bower.json
+* Updated jquery version dependency in bower.json
 
 ## Version 1.1.1 - December 31 2014
 

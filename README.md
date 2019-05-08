@@ -81,7 +81,7 @@ Completely removes sticky table classes and elements and destroys the instance.
   $('#myTable').stickyTable('destroy');
 ```
 
-## Colors
+## Styles
 
 The sticky headers have default colors set, but you can override this css:
 
