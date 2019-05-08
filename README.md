@@ -4,6 +4,7 @@
 This is a version of the sticky table code originally written by Terry Munn, wrapped in a jquery plugin to make it more reusable. I also added some new options and functions.
 
 * [Example](http://jpchip.github.io/stickytable/example/)
+* [Example ES Module](http://jpchip.github.io/stickytable/example/module.html)
 
 ## Installing / Getting started
 
@@ -78,6 +79,22 @@ Completely removes sticky table classes and elements and destroys the instance.
 
 ```javascript
   $('#myTable').stickyTable('destroy');
+```
+
+## Colors
+
+The sticky headers have default colors set, but you can override this css:
+
+```bash
+.sticky-wrap .sticky-intersect th {
+    background-color: #666;
+    color: #eee;
+}
+
+.sticky-wrap th {
+	background-color: #666;
+	color: #eee;
+}
 ```
 
 ## Exceptions
